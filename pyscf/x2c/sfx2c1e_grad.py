@@ -167,7 +167,8 @@ def _gen_first_order_quantities(mol, e0, c0, x0, approx='1E'):
     s_nesc0_vbas = reduce(numpy.dot, (v_s.T, s_nesc0, v_s))
     R0_mid = numpy.einsum('i,ij,j->ij', 1./w_sqrt, s_nesc0_vbas, 1./w_sqrt)
     wr0, vr0 = scipy.linalg.eigh(R0_mid)
-    wr0_sqrt = numpy.sqrt(wr0)
+    
+    wr0_sqrt = numpy.sqrt(abs(wr0))
     # R0 in v_s basis
     R0 = numpy.dot(vr0/wr0_sqrt, vr0.T)
     R0 *= w_sqrt
